@@ -1,0 +1,58 @@
+{{#flatPaths}}
+# {{methodUpperCase}} {{{path}}}
+## summary
+{{summary}}
+## description
+{{{description}}}
+
+## Request
+### Request parameters
+|Name|In|Description|Required|Type|
+|-|-|-|-|-|
+{{#parameters}}
+|{{name}}|{{in}}|{{description}}|{{required}}|{{schema.type}}|
+{{/parameters}}
+{{^parameters}}
+|NA|NA|NA|NA|NA|
+{{/parameters}}
+
+### Request body
+{{#flatedRequestBody}}
+|Name|Description|Type|
+|-|-|-|
+{{#flatedJSONSchema}}
+|{{name}}|{{description}}|{{type}}|
+{{/flatedJSONSchema}}
+{{^flatedJSONSchema}}
+|NA|NA|NA|
+{{/flatedJSONSchema}}
+
+{{/flatedRequestBody}}
+
+## Response
+### Response code
+|Status Code|Description|
+|-|-|
+{{#flatedResponses}}
+{{#.}}
+|{{code}}|{{description}}|
+{{/.}}
+{{/flatedResponses}}
+
+### Response body
+{{#flatedResponses}}
+{{#.}}
+***{{code}}***
+|Name|Description|Type|
+|-|-|-|
+{{#responseBody}}
+|{{name}}|{{description}}|{{type}}|
+{{/responseBody}}
+{{^responseBody}}
+|NA|NA|NA|
+{{/responseBody}}
+
+{{/.}}
+{{/flatedResponses}}
+{{/flatPaths}}
+

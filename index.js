@@ -33,6 +33,7 @@ commander
     .version(pkg.version)
     .option('--build-dir [buildDir]', 'The assets output path')
     .option('--swagger', 'Parse swagger file')
+    .option('--swagger-template [swaggerTemplate]', 'Template from swagger to markdown')
     .parse(process.argv)
 
 
@@ -52,7 +53,8 @@ async function main() {
         }
 
         if (commander.swagger) {
-            content = await swg2md.render(f)
+            let swaggerTemplate = commander.swaggerTemplate || require.resolve("./templateSwagger.mustache")
+            content = await swg2md.render(f, { templateFile: swaggerTemplate })
             tasks.push(content)
 
         } else {
