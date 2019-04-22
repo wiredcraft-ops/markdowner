@@ -18,7 +18,7 @@ function read(f) {
 function renderToMD(contents) {
     const output = []
     contents.forEach((vaule) => {
-        output.push(mdRender(vaule, { path: commander.buildDir }))
+        output.push(mdRender(vaule, { path: commander.buildDir, assetsUrl: commander.assetsUrl }))
     })
     for (let c of output) {
         if (!commander.withoutToc) {
@@ -37,6 +37,7 @@ commander
     .version(pkg.version)
     .option('--build-dir [buildDir]', 'The assets output path')
     .option('--swagger', 'Parse swagger file')
+    .option('--assets-url [assetsUrl]', 'the assets url will be used by image url')
     .option('--without-toc', 'Without table of contents')
     .option('--swagger-template [swaggerTemplate]', 'Template from swagger to markdown')
     .parse(process.argv)

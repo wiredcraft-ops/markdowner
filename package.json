@@ -22,7 +22,7 @@
   "dependencies": {
     "commander": "^2.20.0",
     "markdown-toc": "^1.2.0",
-    "markdowner-pretty": "^1.0.2",
+    "markdowner-pretty": "^1.0.3",
     "swg2md": "^1.0.7"
   }
 }
