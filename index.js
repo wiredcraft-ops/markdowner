@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const pkg = require('./package.json')
 const commander = require('commander')
+const toc = require('markdown-toc')
 const fs = require('fs')
 const mdRender = require('markdowner-pretty/render')
 const swg2md = require('swg2md')
@@ -20,6 +21,9 @@ function renderToMD(contents) {
         output.push(mdRender(vaule, { path: commander.buildDir }))
     })
     for (let c of output) {
+        if (!commander.withoutToc) {
+            c = `${toc(c).content}\n${c}`
+        }
         console.log(c)
     }
 
@@ -33,6 +37,7 @@ commander
     .version(pkg.version)
     .option('--build-dir [buildDir]', 'The assets output path')
     .option('--swagger', 'Parse swagger file')
+    .option('--without-toc', 'Without table of contents')
     .option('--swagger-template [swaggerTemplate]', 'Template from swagger to markdown')
     .parse(process.argv)
 
