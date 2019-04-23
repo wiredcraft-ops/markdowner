@@ -1,4 +1,2 @@
-FROM buildkite/puppeteer:latest
-RUN apt update && apt install -y git
+FROM boratbot/puppeteer:latest
 RUN npm install wcl-markdowner
-ENV PATH="${PATH}:/node_modules/.bin"

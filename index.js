@@ -19,7 +19,11 @@ function renderToMD(contents) {
     const output = []
     const option = { path: commander.buildDir, assetsUrl: commander.assetsUrl }
     if (commander.puppeteerConfig) {
-        option.puppeteerConfig = commander.puppeteerConfig
+        if (!fs.existsSync(commander.puppeteerConfig)) {
+            exit(`Puppeteer config file ${cmd.puppeteerConfig} doesn't exist`)
+        }
+
+        option.puppeteerConfig = JSON.parse(fs.readFileSync(commander.puppeteerConfig))
     }
     contents.forEach((vaule) => {
         output.push(mdRender(vaule, option))
