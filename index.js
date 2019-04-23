@@ -17,8 +17,12 @@ function read(f) {
 
 function renderToMD(contents) {
     const output = []
+    const option = { path: commander.buildDir, assetsUrl: commander.assetsUrl }
+    if (commander.puppeteerConfig) {
+        option.puppeteerConfig = commander.puppeteerConfig
+    }
     contents.forEach((vaule) => {
-        output.push(mdRender(vaule, { path: commander.buildDir, assetsUrl: commander.assetsUrl }))
+        output.push(mdRender(vaule, option))
     })
     for (let c of output) {
         if (!commander.withoutToc) {
@@ -40,6 +44,7 @@ commander
     .option('--assets-url [assetsUrl]', 'the assets url will be used by image url')
     .option('--without-toc', 'Without table of contents')
     .option('--swagger-template [swaggerTemplate]', 'Template from swagger to markdown')
+    .option('-p, --puppeteer-config [puppeteer-config]', 'Customer Config of Puppeteer')
     .parse(process.argv)
 
 
